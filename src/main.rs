@@ -36,6 +36,9 @@ extern crate pledge;
 use unveil::unveil;
 use pledge::{pledge};
 
+mod sigs;
+mod daemon;
+
 fn main(){
     println!("Dungeon Honeypot");
     test_unveil();
