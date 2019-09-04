@@ -5,3 +5,5 @@ authors = ["Giacomo Picchiarelli <gpicchiarelli@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+unveil = "0.2.0"
+pledge = "0.3.1"
