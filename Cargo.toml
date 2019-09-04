@@ -5,7 +5,7 @@ authors = ["Giacomo Picchiarelli <gpicchiarelli@gmail.com>"]
 edition = "2018"
 description = "A modular honeypot for OpenBSD"
 license_file = "LICENSE"
-license = "New BSD"
+license = "" BSD-3-Clause
 repository = "https://github.com/gpicchiarelli/dungeond.git"
 
 [dependencies]
