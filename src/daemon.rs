@@ -35,7 +35,7 @@ extern crate daemonize;
 use std::fs::File;
 use daemonize::Daemonize;
 
-fn get_daemon(){
+pub fn get_daemon(){
     let stdout = File::create("/tmp/dungeond.out").unwrap();
     let stderr = File::create("/tmp/dungeond.err").unwrap();
 

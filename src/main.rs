@@ -33,26 +33,61 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern crate unveil;
 extern crate pledge;
 
-use unveil::unveil;
-use pledge::{pledge};
-
 mod sigs;
 mod daemon;
+
+use unveil::unveil;
+use pledge::{pledge, Promise, ToPromiseString};
+use daemon::get_daemon;
+use std::env;
 
 fn main(){
     println!("Dungeon Honeypot");
     test_unveil();
-    test_pledge();
+//    test_pledge();
+    get_daemon();
 }
 
 fn test_unveil(){
-    unveil("/etc", "r").unwrap();//just for test
-    unveil("", "").unwrap();
+    let path = env::current_dir().unwrap().as_os_str().to_os_string();
+    unveil("/tmp", "rw").unwrap();
+    unveil(&path, "rw").unwrap();
 }
 
 fn test_pledge(){
-    if pledge("stdio rpath").is_err(){
-        panic!("failed to pledge");
+        match pledge(&vec![Promise::Audio,
+    Promise::Chown,
+    Promise::CPath,
+    Promise::DiskLabel,
+    Promise::Dns,
+    Promise::DPath,
+    Promise::Drm,
+    Promise::Exec,
+    Promise::Fattr,
+    Promise::Flock,
+    Promise::Getpw,
+    Promise::Id,
+    Promise::Inet,
+    Promise::Ioctl,
+    Promise::MCast,
+    Promise::Pf,
+    Promise::Proc,
+    Promise::ProtExec,
+    Promise::Ps,
+    Promise::Recvfd,
+    Promise::Route,
+    Promise::RPath,
+    Promise::Sendfd,
+    Promise::Settime,
+    Promise::Stdio,
+    Promise::TMPPath,
+    Promise::Tty,
+    Promise::Unix,
+    Promise::Vminfo,
+    Promise::Vmm,
+Promise::WPath].to_promise_string()) {
+        Err(_) => println!("Failed to pledge"),
+        _ => ()
     }
 }
 

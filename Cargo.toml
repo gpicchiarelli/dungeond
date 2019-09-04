@@ -11,10 +11,10 @@ repository = "https://github.com/gpicchiarelli/dungeond.git"
 [dependencies]
 unveil = "0.2.0"
 pledge = "0.3.1"
-unix-daemonize = "0.1.2"
 log4rs-syslog = "3.0.3"
 signal-hook = "0.1.10"
 hyperlocal = "0.6.0"
+daemonize = "0.4.1"
 
 [badges]
 
