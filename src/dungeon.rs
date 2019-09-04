@@ -33,7 +33,23 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern crate unveil;
 extern crate pledge;
 
+use unveil::unveil;
+use pledge::{pledge, Promise, ToPromiseString};
+
+fn test_unveil(){
+    unveil("/etc", "r").unwrap();//just for test
+    unveil("", "").unwrap();
+}
+
+fn test_pledge(){
+    match pledge(&vec![Promise::Stdio, Promise::RPath].to_promise_string()) {
+        Err(_) => println!("Failed to pledge"),
+        _ => ()
+}
+
 fn main() {
-    println!("Hello, world!");
+    println!("Dungeon Honeypot");
+    test_pledge();
+    test_unveil();
 }
 
