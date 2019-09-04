@@ -39,7 +39,7 @@ mod daemon;
 use unveil::unveil;
 use pledge::{pledge, Promise, ToPromiseString};
 use daemon::get_daemon;
-use std::env;
+use std::*;
 
 fn main(){
     println!("Dungeon Honeypot");
@@ -49,9 +49,9 @@ fn main(){
 }
 
 fn test_unveil(){
-    let path = env::current_dir().unwrap().as_os_str().to_os_string();
+    let p = env::current_exe().unwrap().to_string_lossy().to_string();
     unveil("/tmp", "rw").unwrap();
-    unveil(&path, "rw").unwrap();
+    unveil(&p, "rw").unwrap();
 }
 
 fn test_pledge(){
